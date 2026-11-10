@@ -1,0 +1,34 @@
+# Sensitive work products / manuscripts (never commit)
+.env
+.env.*
+!.env.example
+*token*
+*credentials*
+*secret*
+*.pem
+*.key
+manuscript/
+*.docx
+*.pdf
+*.zip
+*.html
+# Original or derived genomic data
+data/
+*.vcf
+*.vcf.gz
+*.tbi
+*.npz
+# Large and potentially sensitive experiment outputs
+results/
+logs/
+figures/
+# Third-party source and environments
+genomator/
+genomator-wsl-venv/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.vscode/
+.repro_runs/
+.DS_Store

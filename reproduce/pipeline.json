@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "project_name": "Huzaifa Paper 1: Synthetic Genomic Privacy Audit",
+  "notes": "Set every script to the exact ORIGINAL experiment script after inventory. Empty scripts intentionally BLOCK full rerun rather than reusing old results. Existing step35/36 filenames are known from the research conversation.",
+  "baseline_tolerance_auc": 0.00015,
+  "reference_results": {
+    "256_SNP": {
+      "actual_auc": 0.6772,
+      "shadow_auc": 0.5036,
+      "auc_gap": 0.1736,
+      "calibrated_auc": 0.6885,
+      "gap_ci_lower": 0.0976,
+      "gap_ci_upper": 0.2509
+    },
+    "1024_SNP": {
+      "actual_auc": 0.7678,
+      "shadow_auc": 0.5192,
+      "auc_gap": 0.2486,
+      "calibrated_auc": 0.728,
+      "gap_ci_lower": 0.1874,
+      "gap_ci_upper": 0.3104
+    },
+    "256_repeats": {
+      "n_repeats": 5,
+      "actual_auc_mean": 0.73574,
+      "shadow_auc_mean": 0.50474,
+      "auc_gap_mean": 0.231
+    }
+  },
+  "stages": [
+    {
+      "id": "31_256_generate",
+      "label": "256-SNP cohort and Genomator generation",
+      "script": "src/step31_genomator_pilot.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step31_genomator/pilot_train.vcf",
+        "results/step31_genomator/pilot_heldout.vcf",
+        "results/step31_genomator/pilot_synthetic.vcf",
+        "results/step31_genomator/cohort_manifest.csv"
+      ],
+      "hints": [
+        "step31",
+        "genomator",
+        "256"
+      ],
+      "timeout_seconds": 14400
+    },
+    {
+      "id": "32_256_attack",
+      "label": "256-SNP membership-inference attack",
+      "script": "src/step32_membership_attack.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step31_genomator/step32_attack_results.json"
+      ],
+      "hints": [
+        "step32",
+        "attack",
+        "256"
+      ],
+      "timeout_seconds": 3600
+    },
+    {
+      "id": "32_256_shadow",
+      "label": "256-SNP independent shadow generator and attack",
+      "script": "src/step32_genomator_shadow_control.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step32_shadow_control/shadow_control_results.json",
+        "results/step32_shadow_control/shadow_synthetic.vcf"
+      ],
+      "hints": [
+        "step32",
+        "shadow",
+        "256"
+      ],
+      "timeout_seconds": 14400
+    },
+    {
+      "id": "33_repeats",
+      "label": "Five independent 256-SNP repetitions",
+      "script": "src/step33_independent_validation.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step33_independent_validation/repeat_results.csv"
+      ],
+      "hints": [
+        "step33",
+        "repeat",
+        "validation"
+      ],
+      "timeout_seconds": 21600
+    },
+    {
+      "id": "34_1024_generate",
+      "label": "1024-SNP cohort and Genomator generation",
+      "script": "src/step33_genomator_1024.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step31_genomator_1024/pilot_train.vcf",
+        "results/step31_genomator_1024/pilot_heldout.vcf",
+        "results/step31_genomator_1024/pilot_synthetic.vcf",
+        "results/step31_genomator_1024/cohort_manifest.csv"
+      ],
+      "hints": [
+        "step34",
+        "genomator",
+        "1024"
+      ],
+      "timeout_seconds": 14400
+    },
+    {
+      "id": "34_1024_attack",
+      "label": "1024-SNP membership-inference attack",
+      "script": "src/step33_membership_attack_1024.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step31_genomator_1024/step32_attack_results.json"
+      ],
+      "hints": [
+        "step32",
+        "step34",
+        "1024",
+        "attack"
+      ],
+      "timeout_seconds": 3600
+    },
+    {
+      "id": "34_1024_shadow",
+      "label": "1024-SNP independent shadow generator and attack",
+      "script": "src/step34_shadow_control_1024.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step34_shadow_control_1024/shadow_control_results.json",
+        "results/step34_shadow_control_1024/shadow_synthetic.vcf"
+      ],
+      "hints": [
+        "step34",
+        "shadow",
+        "1024"
+      ],
+      "timeout_seconds": 14400
+    },
+    {
+      "id": "35_package",
+      "label": "Publication tables, figures and draft manuscript",
+      "script": "src/step35_publication_package.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step35_publication/publication_summary.json",
+        "manuscript/huzaifa_paper1_draft.md"
+      ],
+      "hints": [
+        "step35",
+        "publication"
+      ],
+      "timeout_seconds": 1800
+    },
+    {
+      "id": "36_validation",
+      "label": "Bootstrap, ancestry and kinship sensitivity",
+      "script": "src/step36_final_scientific_validation.py",
+      "executor": "wsl_python",
+      "expected_outputs": [
+        "results/step36_final_validation/final_validation.json",
+        "results/step36_final_validation/ancestry_calibration.csv",
+        "results/step36_final_validation/relatedness_sensitivity.csv"
+      ],
+      "hints": [
+        "step36",
+        "validation"
+      ],
+      "timeout_seconds": 7200
+    }
+  ]
+}
