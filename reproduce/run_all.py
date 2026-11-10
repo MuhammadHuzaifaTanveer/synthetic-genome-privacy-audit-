@@ -136,8 +136,8 @@ def environment(project, pipeline):
     info['runner_packages'] = packages
     for label, cmd in (
         ('windows_python', [str(project / '.venv' / 'Scripts' / 'python.exe'), '--version']),
-        ('wsl_python', ['wsl', '-d', 'Ubuntu', '--', '/home/huzaifa/genomator-venv/bin/python', '--version']),
-        ('wsl_genomator', ['wsl', '-d', 'Ubuntu', '--', '/home/huzaifa/genomator-venv/bin/genomator', '--help']),
+        ('wsl_python', ['wsl', '-d', 'Ubuntu', '--', os.environ.get('GENOMATOR_PYTHON_WSL', '/usr/bin/python3'), '--version']),
+        ('wsl_genomator', ['wsl', '-d', 'Ubuntu', '--', os.environ.get('GENOMATOR_BIN_WSL', '/usr/local/bin/genomator'), '--help']),
     ):
         try:
             p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=12)
@@ -156,7 +156,7 @@ def environment(project, pipeline):
         'print(json.dumps(out))\n'
     )
     try:
-        p = subprocess.run(['wsl','-d','Ubuntu','--','/home/huzaifa/genomator-venv/bin/python','-c',wsl_code],
+        p = subprocess.run(['wsl','-d','Ubuntu','--',os.environ.get('GENOMATOR_PYTHON_WSL', '/usr/bin/python3'),'-c',wsl_code],
                            capture_output=True, text=True, timeout=30)
         info['wsl_package_versions'] = json.loads(p.stdout) if p.returncode == 0 else {'error': p.stderr[:1500]}
     except Exception as exc:
@@ -483,7 +483,7 @@ def main():
     parser.add_argument('--mode', choices=('inventory', 'full', 'report'), default='inventory')
     parser.add_argument('--allow-overwrite', action='store_true', help='Required for full mode: original scripts may overwrite outputs')
     parser.add_argument('--python-win', type=Path, default=None)
-    parser.add_argument('--python-wsl', default='/home/huzaifa/genomator-venv/bin/python')
+    parser.add_argument('--python-wsl', default=os.environ.get('GENOMATOR_PYTHON_WSL', '/usr/bin/python3'))
     parser.add_argument('--distro', default='Ubuntu')
     args = parser.parse_args()
     project = args.project.resolve()

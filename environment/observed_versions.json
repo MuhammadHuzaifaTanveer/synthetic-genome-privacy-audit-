@@ -1,0 +1,11 @@
+{
+  "observed_versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "cyvcf2": "0.34.0",
+    "matplotlib": "3.11.2",
+    "vcfpy": "0.14.2",
+    "genomator": "0.0.1"
+  },
+  "source": "Existing WSL Genomator Python when available; otherwise invoking Python; not proof the original experiments used these versions"
+}

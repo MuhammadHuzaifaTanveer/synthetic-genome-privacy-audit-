@@ -1,10 +1,11 @@
+import os
 
 from pathlib import Path
 import json
 import numpy as np
 import pandas as pd
 
-ROOT = Path(r"D:\research\Huzaifa\Paper1")
+ROOT = Path(os.environ.get("PAPER1_ROOT", Path(__file__).resolve().parents[1])).resolve()
 PROCESSED = ROOT / "data" / "processed"
 RESULTS = ROOT / "results"
 RESULTS.mkdir(parents=True, exist_ok=True)

@@ -1,3 +1,4 @@
+import os
 
 from pathlib import Path
 import json
@@ -8,7 +9,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-ROOT = Path("/mnt/d/research/Huzaifa/Paper1")
+ROOT = Path(os.environ.get("PAPER1_ROOT", Path(__file__).resolve().parents[1])).resolve()
 RESULTS = ROOT / "results"
 OUT = RESULTS / "step35_publication"
 FIGURES = OUT / "figures"

@@ -1,3 +1,4 @@
+import os
 
 from pathlib import Path
 import json
@@ -6,7 +7,7 @@ import numpy as np
 import pandas as pd
 from cyvcf2 import VCF
 
-ROOT = Path("/mnt/d/research/Huzaifa/Paper1")
+ROOT = Path(os.environ.get("PAPER1_ROOT", Path(__file__).resolve().parents[1])).resolve()
 OUT = ROOT / "results" / "step31_genomator_1024"
 RNG = np.random.default_rng(3201)
 

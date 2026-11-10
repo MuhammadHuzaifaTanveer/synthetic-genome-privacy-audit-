@@ -1,0 +1,4 @@
+experiment,snps,splits,actual_auc,shadow_auc,auc_gap,ci_lower,ci_upper
+256 SNPs: original,256,1,0.6772,0.5036,0.1736,0.5946,0.7586
+256 SNPs: five-split mean,256,5,0.7357400000000001,0.50474,0.231,,
+1024 SNPs: original,1024,1,0.7678,0.5192,0.2486,0.6887,0.8401

@@ -32,3 +32,11 @@ __pycache__/
 .vscode/
 .repro_runs/
 .DS_Store
+
+# Internal preparation and private inputs
+update_huzaifa_repo.py
+*.part
+*.log
+*.bak
+# Only allow manually curated publishable aggregate output folder
+!public_results/

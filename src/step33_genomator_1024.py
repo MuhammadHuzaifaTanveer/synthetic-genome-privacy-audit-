@@ -1,3 +1,5 @@
+import shutil
+import os
 
 from pathlib import Path
 import csv
@@ -10,7 +12,7 @@ import numpy as np
 import pandas as pd
 from cyvcf2 import VCF
 
-ROOT = Path("/mnt/d/research/Huzaifa/Paper1")
+ROOT = Path(os.environ.get("PAPER1_ROOT", Path(__file__).resolve().parents[1])).resolve()
 DATA = ROOT / "data"
 OUT = ROOT / "results" / "step31_genomator_1024"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -18,7 +20,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 META = DATA / "processed" / "chr22_pilot_sample_metadata.csv"
 NPZ = DATA / "processed" / "chr22_expanded_genotypes.npz"
 VCF_FILES = sorted((DATA / "raw" / "1000g_phase3").glob("ALL.chr22*.vcf.gz"))
-GENOMATOR = Path("/home/huzaifa/genomator-venv/bin/genomator")
+GENOMATOR = Path(os.environ.get("GENOMATOR_BIN", shutil.which("genomator") or "/usr/local/bin/genomator"))
 
 SEED = 3101
 TRAIN_PER_ANCESTRY = 20

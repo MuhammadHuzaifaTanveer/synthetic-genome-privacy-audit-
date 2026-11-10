@@ -1,3 +1,5 @@
+import shutil
+import os
 
 from pathlib import Path
 import json
@@ -7,14 +9,14 @@ import numpy as np
 import pandas as pd
 from cyvcf2 import VCF
 
-ROOT = Path("/mnt/d/research/Huzaifa/Paper1")
+ROOT = Path(os.environ.get("PAPER1_ROOT", Path(__file__).resolve().parents[1])).resolve()
 BASE = ROOT / "results" / "step31_genomator"
 OUT = ROOT / "results" / "step32_shadow_control"
 OUT.mkdir(parents=True, exist_ok=True)
 
 META = ROOT / "data/processed/chr22_pilot_sample_metadata.csv"
 SOURCE_DIR = ROOT / "data/raw/1000g_phase3"
-GENOMATOR = "/home/huzaifa/genomator-venv/bin/genomator"
+GENOMATOR = os.environ.get("GENOMATOR_BIN", shutil.which("genomator") or "/usr/local/bin/genomator")
 
 rng = np.random.default_rng(3202)
 

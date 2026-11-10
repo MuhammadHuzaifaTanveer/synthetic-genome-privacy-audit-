@@ -1,0 +1,45 @@
+{
+  "description": "SHA256 fingerprints of original local inputs; no input contents published",
+  "inputs": [
+    {
+      "path": "data/raw/1000g_phase3_samples.panel",
+      "sha256": "b4023dc6ee2d62ee89c8d4d347db4d348e65518d66d346574cdae7a4bbd76858",
+      "bytes": 55156
+    },
+    {
+      "path": "data/processed/chr22_pilot_sample_metadata.csv",
+      "sha256": "3b516150ac998924cde7ec225ef5ca7f99510bebaef52dae4162a009c526c52f",
+      "bytes": 62689
+    },
+    {
+      "path": "data/raw/1000g_phase3/ALL.chr20.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz",
+      "sha256": "1bbddc1eac3b35d9408bdfb435632126614a7ac89d32d27aa30db6dc94600fec",
+      "bytes": 327135853
+    },
+    {
+      "path": "data/processed/chr20_expanded_genotypes.npz",
+      "sha256": "5351d8da66e087b6e09180c1257b7faf1b201aba2dd63ec1a95f21b270231522",
+      "bytes": 11108521
+    },
+    {
+      "path": "data/raw/1000g_phase3/ALL.chr21.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz",
+      "sha256": "1942e0709625d77928b191e5a1bfbf523aad2fee1764994a599ae4623305cace",
+      "bytes": 209774472
+    },
+    {
+      "path": "data/processed/chr21_expanded_genotypes.npz",
+      "sha256": "3308c3aa89d47dcfd60d52a975e20ce7a94183478bca07cd519f9d7cc37072b8",
+      "bytes": 6755500
+    },
+    {
+      "path": "data/raw/1000g_phase3/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz",
+      "sha256": "a90c16c4ff2b3196476d506ae13cb3047fae8670163c7c932c4b0239aef3daf5",
+      "bytes": 205612353
+    },
+    {
+      "path": "data/processed/chr22_expanded_genotypes.npz",
+      "sha256": "5136376a182c453de7ee3ed185c493980189a4f4a4d01fb31f9f33f8c07344fa",
+      "bytes": 6511116
+    }
+  ]
+}

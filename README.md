@@ -31,3 +31,14 @@ Do **not** run `--mode full` until root paths, Genomator installation, data and 
 ## Publication and privacy policy
 
 This repository is code-only. Do not commit unpublished manuscripts, participant-level genotypes, source credentials, local logs, or HTML defense bundles. Figures and tables should be released separately only after appropriate review. Original third-party source and license details belong with their upstream authors.
+
+
+## Data, selected results and environment
+
+- [Data acquisition and reproduction instructions](docs/DATA_AND_REPRODUCTION.md)
+- [Original input SHA-256 fingerprints](docs/input_fingerprints.json)
+- [Selected historical aggregate results](public_results/MANIFEST.json)
+- [Observed software versions](environment/observed_versions.json)
+- `requirements.in` documents direct Python dependencies; Genomator is installed separately.
+
+**Status:** source code and selected aggregate artifacts are public; independent end-to-end reproduction is **not yet verified**. All manuscript drafts and genotype-level data are excluded. The reproducer still relies on a Windows-to-WSL workflow with local environment configuration.
